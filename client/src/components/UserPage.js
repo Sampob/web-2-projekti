@@ -13,16 +13,16 @@ const UserPage = () => {
     const [activeTab, setActiveTab] = useState('login');
 
     useEffect(() => {
-        authenticateUser().then(r => {
-            if (r.status === 200) {
-                setLoggedIn(true);
-                setActiveTab('user');
-            } else {
-                setLoggedIn(false);
-                setActiveTab('login');
-            }
+        authenticateUser().then(() => {
+            setLoggedIn(true);
+            setActiveTab('user');
+        }).catch(() => {
+            setLoggedIn(false);
+            setActiveTab('login');
         });
-    });
+
+    }, []);
+
 
     return (
         <Tabs
@@ -33,10 +33,13 @@ const UserPage = () => {
                 <User/>
             </Tab>
             <Tab disabled={loggedIn} eventKey="login" title="Log In">
-                <Login/>
+                <Login
+                    activeTab={activeTab}
+                />
             </Tab>
             <Tab disabled={loggedIn} eventKey="register" title="Register">
                 <Register
+                    activeTab={activeTab}
                     tab={setActiveTab}
                 />
             </Tab>

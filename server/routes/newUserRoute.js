@@ -13,15 +13,28 @@ router.post('/newUser', function (req, res) {
         let sql = "INSERT INTO users (username, email, password)"
             + " VALUES ( ?, ?, ?)";
 
-        //TODO Duplicate email handling
-        conn.query(sql, [jsonObj.username, jsonObj.email, hash], function (err) {
-            if (err) {
-                console.log("Insertion into 'users' table was not successful!", err);
-                res.status(400).send("POST was not successful");
-            } else {
-                res.status(201).send("POST successful");
-            }
-        });
+        //Checks if error with SQL INSERT, and posts error to client
+        try {
+            conn.query(sql, [jsonObj.username, jsonObj.email, hash], function (err) {
+                if (err) {
+                    if (err.errno === 1062) {
+                        res.status(406).send({
+                            text: "Email already in use",
+                            field: 2
+                        });
+                    } else {
+                        res.status(400).send({
+                            text: "POST was not successful",
+                            field: 0
+                        });
+                    }
+                } else {
+                    res.status(201).send("POST successful");
+                }
+            });
+        } catch (e) {
+            console.error(e);
+        }
     });
 });
 
