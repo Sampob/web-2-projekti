@@ -1,5 +1,7 @@
 const mysql = require('mysql');
 const util = require('util');
+
+//MySQL's connection parameters (server, login etc.) are stored in db.config.js file
 const dbConfig = require("../config/db.config.js");
 
 const conn = mysql.createConnection(dbConfig);

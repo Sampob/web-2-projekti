@@ -16,7 +16,7 @@ router.post('/loginUser', async function (req, res) {
     try {
         bcrypt.compare(jsonObj.password, userPassword.password, function (err, result) {
 
-            //If hash and password match, we create a jwt token and send it to client
+            //If hash and password match, we create a jwt (token) and send it to client with the username
             if (result) {
                 const accessToken = jwt.sign({name: jsonObj.email}, process.env.TOKEN_SECRET, {expiresIn: "1h"})
                 res.status(202).json({accessToken: accessToken, username: userPassword.username});
