@@ -13,6 +13,10 @@ const cors = require('cors');
 app.use(express.json());
 app.use(cors());
 
+//Logs http requests and what's sent
+const logger = require('morgan');
+app.use(logger('dev'));
+
 //Routes in individual files, 'imported' here
 const authenticationRoute = require("./routes/authenticationRoute");
 const loginRoute = require("./routes/loginRoute");

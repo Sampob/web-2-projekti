@@ -10,11 +10,10 @@ const Home = () => {
 
     }
 
-    useEffect( () => {
-        authenticateUser().then(r => {
-            if(r.status === 200)handleLoggedIn();
-            else setLoggedIn(false);
-        })
+    useEffect(() => {
+        authenticateUser().then(() => {
+            handleLoggedIn();
+        }).catch(() => setLoggedIn(false));
     });
 
     return (
