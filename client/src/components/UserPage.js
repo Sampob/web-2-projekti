@@ -10,7 +10,7 @@ import {useEffect, useState} from "react";
 
 const UserPage = () => {
     const [loggedIn, setLoggedIn] = useState(false);
-    const [activeTab, setActiveTab] = useState('login');
+    const [activeTab, setActiveTab] = useState('');
 
     useEffect(() => {
         authenticateUser().then(() => {
