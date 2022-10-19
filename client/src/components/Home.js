@@ -14,7 +14,7 @@ const Home = () => {
         authenticateUser().then(() => {
             handleLoggedIn();
         }).catch(() => setLoggedIn(false));
-    });
+    }, []);
 
     return (
         <div>
