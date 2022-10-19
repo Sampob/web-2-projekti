@@ -2,12 +2,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import {useState} from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
 import {Modal} from "react-bootstrap";
 
-const Register = () => {
-
-    const navigate = useNavigate();
+const Register = (props) => {
 
     const [formUsername, changeFormUsername] = useState('');
     const [formEmail, changeFormEmail] = useState('');
@@ -20,8 +17,11 @@ const Register = () => {
 
     const showSuccessModal = () => changeSuccessModal(true);
     const closeSuccessModal = () => {
+        changeFormUsername('');
+        changeFormEmail('');
+        changeFormPassword('');
         changeSuccessModal(false);
-        navigate('/user');
+        props.tab("login");
     }
 
     const newUser = (e) => {
@@ -51,7 +51,7 @@ const Register = () => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <p>Hello {formUsername}! Redirecting you to the home page.</p>
+                    <p>Hello {formUsername}, you can now log in.</p>
                 </Modal.Body>
 
                 <Modal.Footer>

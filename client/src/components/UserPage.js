@@ -36,7 +36,9 @@ const UserPage = () => {
                 <Login/>
             </Tab>
             <Tab disabled={loggedIn} eventKey="register" title="Register">
-                <Register/>
+                <Register
+                    tab={setActiveTab}
+                />
             </Tab>
         </Tabs>
     )
