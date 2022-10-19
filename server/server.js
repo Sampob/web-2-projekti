@@ -21,6 +21,9 @@ app.use(logger('dev'));
 const authenticationRoute = require("./routes/authenticationRoute");
 const loginRoute = require("./routes/loginRoute");
 const newUserRoute = require("./routes/newUserRoute");
+const movieActions = require("./routes/movieActions");
+const getMovies = require("./routes/getMovies");
+const actorActions = require("./routes/actorActions");
 
 app.get('/test', (req, res) => {
     res.send({express: 'BACKEND TEST'});
@@ -30,6 +33,9 @@ app.get('/test', (req, res) => {
 app.use("/", authenticationRoute);
 app.use("/", loginRoute);
 app.use("/", newUserRoute);
+app.use("/", movieActions);
+app.use("/", getMovies);
+app.use("/", actorActions);
 
 //Start listening to requests at defined port
 app.listen(port, () => console.log(`Listening port ${port}`));
