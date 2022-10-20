@@ -24,11 +24,13 @@ const newUserRoute = require("./routes/newUserRoute");
 const movieActions = require("./routes/movieActions");
 const getMovies = require("./routes/getMovies");
 const actorActions = require("./routes/actorActions");
+const getActors = require("./routes/getActors");
 
 app.get('/test', (req, res) => {
     res.send({express: 'BACKEND TEST'});
 });
 
+//TODO Clean up, array?
 //Use these imported routes
 app.use("/", authenticationRoute);
 app.use("/", loginRoute);
@@ -36,6 +38,7 @@ app.use("/", newUserRoute);
 app.use("/", movieActions);
 app.use("/", getMovies);
 app.use("/", actorActions);
+app.use("/", getActors);
 
 //Start listening to requests at defined port
 app.listen(port, () => console.log(`Listening port ${port}`));

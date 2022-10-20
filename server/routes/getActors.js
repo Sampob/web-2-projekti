@@ -3,9 +3,10 @@ const express = require('express');
 const conn = require("./mysqlConn");
 const router = express.Router();
 
-router.get('/getMovies:query', function (req, res) {
+router.get('/getActors:query', function (req, res) {
     const q = "'%" + req.params.query.substring(1) + "%'";
-    let sql = "SELECT id, title, description, poster FROM movies WHERE title LIKE " + q;
+
+    let sql = "SELECT id, name FROM actors WHERE name LIKE " + q;
 
     conn.query(sql, function (err, result) {
         if (err) throw err;
@@ -15,8 +16,8 @@ router.get('/getMovies:query', function (req, res) {
     });
 });
 
-router.get('/getMovies', function (req, res) {
-    let sql = "SELECT id, title, description, poster FROM movies";
+router.get('/getActors', function (req, res) {
+    let sql = "SELECT id, name FROM actors";
 
     conn.query(sql, function (err, result) {
         if (err) throw err;
@@ -26,8 +27,8 @@ router.get('/getMovies', function (req, res) {
     });
 });
 
-router.get('/getMovie:movie', function (req, res) {
-    let sql = "SELECT id, title, description, poster FROM movies WHERE title = '" + req.params.movie.substring(1) + "'";
+router.get('/getActor:actor', function (req, res) {
+    let sql = "SELECT id, name FROM actors WHERE name = '" + req.params.actor.substring(1) + "'";
 
     conn.query(sql, function (err, result) {
         if (err) throw err;
