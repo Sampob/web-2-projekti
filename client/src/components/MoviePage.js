@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Button, Card, Container, Form, Modal, Table} from "react-bootstrap";
 import Accordion from 'react-bootstrap/Accordion'
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {authenticateUser} from "../functions/AuthenticateUser";
 
 const MoviePage = () => {
@@ -16,6 +16,8 @@ const MoviePage = () => {
         description: '',
         poster: ''
     });
+    const [movieActors, setMovieActors] = useState([]);
+
     const [movieModal, changeModal] = useState(false);
     const [movieModalText, changeMovieModalText] = useState({});
 
@@ -47,12 +49,19 @@ const MoviePage = () => {
             })
             .catch(err => {
                 console.log(err);
+            });
+        axios.get(("http://localhost:5000/selectMovieActors:" + selectedMovie))
+            .then(r => {
+                setMovieActors(r.data);
             })
+            .catch(err => {
+                console.log(err);
+            });
     }, []);
 
     const editButton = (e) => {
         e.preventDefault();
-        axios.put((("http://localhost:5000/editMovie/") + selectedMovie), {
+        axios.put(("http://localhost:5000/editMovie/" + selectedMovie), {
             description: movieDescription,
             poster: moviePoster,
             accessToken: JSON.parse(localStorage.getItem('myToken')).accessToken
@@ -69,8 +78,18 @@ const MoviePage = () => {
             .catch(err => {
                 console.log(err);
             });
-
     }
+
+    const displayActors = movieActors.map((data) => {
+        return (
+            <tr key={data.id}>
+                <td>{data.name}</td>
+                <td>
+                    <Link to={"/actor?name=" + data.name}><Button>View</Button></Link>
+                </td>
+            </tr>
+        );
+    });
 
     const reloadPage = () => {
         window.location.reload(false);
@@ -113,23 +132,18 @@ const MoviePage = () => {
                 <Card.Body>
                     <Card.Title><h3>{movie.title}</h3></Card.Title>
                     <Card.Text>{movie.description}</Card.Text>
-                    <Card.Text>
-                        <h5>Actors</h5>
-                        <Table striped>
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th> </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Leo Di Cap</td>
-                                <td><Button>View</Button></td>
-                            </tr>
-                            </tbody>
-                        </Table>
-                    </Card.Text>
+                    <h5>Actors</h5>
+                    <Table striped>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {displayActors}
+                        </tbody>
+                    </Table>
                 </Card.Body>
             </Card>
             <br/>
