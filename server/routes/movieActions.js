@@ -86,6 +86,8 @@ router.put('/editMovie/:movie', function (req, res) {
 
 router.delete('/deleteMovie/:movie/:token', function (req, res) {
     if (authentication(req.params.token)) {
+        conn.query("DELETE FROM actor_movie WHERE movie_id = (SELECT id FROM movies WHERE title = '"
+            + req.params.movie + "')");
         let sql = "DELETE FROM movies WHERE title = '" + req.params.movie + "'";
         conn.query(sql, function (err, response) {
             if (err) {

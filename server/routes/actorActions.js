@@ -49,9 +49,11 @@ router.put('/editActor:actor', function (req, res){
     }
 });
 
-router.delete('/deleteActor:actor', function (req, res) {
-    if(authentication(req.body.accessToken)) {
-        let sql = "DELETE FROM actors WHERE name = '" + req.params.actor.substring(1) + "'";
+router.delete('/deleteActor/:actor/:token', function (req, res) {
+    if(authentication(req.params.token)) {
+        conn.query("DELETE FROM actor_movie WHERE actor_id = (SELECT id FROM actors WHERE name = '"
+            + req.params.actor + "')");
+        let sql = "DELETE FROM actors WHERE name = '" + req.params.actor + "'";
         conn.query(sql, function (err, response) {
             if(err) {
                 console.log(err);

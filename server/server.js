@@ -25,6 +25,7 @@ const movieActions = require("./routes/movieActions");
 const getMovies = require("./routes/getMovies");
 const actorActions = require("./routes/actorActions");
 const getActors = require("./routes/getActors");
+const actorMovies = require("./routes/actorMovies");
 
 app.get('/test', (req, res) => {
     res.send({express: 'BACKEND TEST'});
@@ -39,6 +40,7 @@ app.use("/", movieActions);
 app.use("/", getMovies);
 app.use("/", actorActions);
 app.use("/", getActors);
+app.use("/", actorMovies);
 
 //Start listening to requests at defined port
 app.listen(port, () => console.log(`Listening port ${port}`));
