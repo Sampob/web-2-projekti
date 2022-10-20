@@ -11,7 +11,7 @@ const User = () => {
         navigate('/');
     }
 
-    return(
+    return (
         <>
             <br/>
             <h3>{getUsername()}</h3>

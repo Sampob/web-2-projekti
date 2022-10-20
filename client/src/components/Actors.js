@@ -58,7 +58,7 @@ const Actors = () => {
                 </tr>
                 </thead>
                 <tbody>
-                    {displayData}
+                {displayData}
                 </tbody>
             </Table>
         </Container>

@@ -1,7 +1,6 @@
 import {Button, Form, Modal} from "react-bootstrap";
 import {useState} from "react";
 import axios from "axios";
-import MovieSelection from "./MovieSelection";
 
 const AddActor = (props) => {
 
@@ -33,7 +32,6 @@ const AddActor = (props) => {
         return returnValue;
     }
 
-    //TODO Error handling
     const addActor = (e) => {
         try {
             e.preventDefault();
@@ -41,7 +39,7 @@ const AddActor = (props) => {
 
         }
 
-        if(validate()) {
+        if (validate()) {
             axios
                 .post('http://localhost:5000/addActor', {
                     name: actorName,
@@ -63,7 +61,6 @@ const AddActor = (props) => {
         color: '#dc3545',
     }
 
-    //TODO Modal component with props
     return (
         <>
             <Modal show={successModal} onHide={closeSuccessModal}>
@@ -94,11 +91,6 @@ const AddActor = (props) => {
                     />
                     <Form.FloatingLabel style={errorStyle} hidden={!actorError} label={actorErrorText}/>
                 </Form.Group>
-
-                <Form.Group className="mb-3" controlId="movieDescription">
-                    <MovieSelection/>
-                </Form.Group>
-
                 <Button disabled={!props.loggedIn} variant="success" type="submit">Add</Button>
             </Form>
         </>

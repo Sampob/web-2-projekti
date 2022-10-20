@@ -7,9 +7,9 @@ const authentication = require("../functions/authentication");
 const router = express.Router();
 
 //TODO Verify actor is in database
-router.put('/editTableActorMovie:actor', function (req, res){
+router.put('/editTableActorMovie:actor', function (req, res) {
 
-    if(authentication(req.body.accessToken)) {
+    if (authentication(req.body.accessToken)) {
         let movie = '';
         let sql = '';
         let error = null;
@@ -22,7 +22,7 @@ router.put('/editTableActorMovie:actor', function (req, res){
                 error = err;
             });
         });
-        if(error !== null) res.status(400).send(error);
+        if (error !== null) res.status(400).send(error);
         else res.status(200).send("PUT Successful");
     } else {
         res.status(401).send({
@@ -34,7 +34,7 @@ router.put('/editTableActorMovie:actor', function (req, res){
 router.get('/selectActorMovies:actor', function (req, res) {
     let sql = "SELECT m.id, m.title FROM movies as m INNER JOIN actor_movie as c ON m.id = c.movie_id INNER JOIN actors as q ON c.actor_id = q.id WHERE q.name = '" + req.params.actor.substring(1) + "'";
     conn.query(sql, function (err, result) {
-        if(err) {
+        if (err) {
             res.status(400).send("Error");
         } else res.status(200).send(result);
     });
@@ -43,7 +43,7 @@ router.get('/selectActorMovies:actor', function (req, res) {
 router.get('/selectMovieActors:movie', function (req, res) {
     let sql = "SELECT q.id, q.name FROM movies as m INNER JOIN actor_movie as c ON m.id = c.movie_id INNER JOIN actors as q ON c.actor_id = q.id WHERE m.title = '" + req.params.movie.substring(1) + "'";
     conn.query(sql, function (err, result) {
-        if(err) {
+        if (err) {
             res.status(400).send("Error");
         } else res.status(200).send(result);
     });

@@ -41,15 +41,14 @@ const Login = (props) => {
     const validate = () => {
         let returnValue = true;
 
-        // eslint-disable-next-line
         const regex =
             /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-        if (loginEmail === '' /*|| !regex.test(loginEmail)*/) {
+        if (loginEmail === '' || !regex.test(loginEmail)) {
             changeEmailError(true);
             changeEmailErrorText("Invalid Email");
             returnValue = false;
         }
-        if(loginPassword === '') {
+        if (loginPassword === '') {
             changePasswordError(true);
             changePasswordErrorText("Invalid password");
             returnValue = false;

@@ -3,8 +3,6 @@ import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {authenticateUser} from "../functions/AuthenticateUser";
 import axios from "axios";
-import {forEach} from "react-bootstrap/ElementChildren";
-
 
 const ActorPage = () => {
 
@@ -152,7 +150,7 @@ const ActorPage = () => {
                         <thead>
                         <tr>
                             <th>Title</th>
-                            <th></th>
+                            <th> </th>
                         </tr>
                         </thead>
                         <tbody>

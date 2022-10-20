@@ -7,7 +7,6 @@ const Home = () => {
 
     const handleLoggedIn = () => {
         setLoggedIn(true);
-
     }
 
     useEffect(() => {

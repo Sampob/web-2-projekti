@@ -6,7 +6,6 @@ const authentication = require("../functions/authentication");
 
 const router = express.Router();
 
-//TODO Authenticate actor adding and editing
 router.post('/addActor', function (req, res) {
     let sql = "INSERT INTO actors (name)"
         + " VALUES (?)";
@@ -39,28 +38,28 @@ router.post('/addActor', function (req, res) {
     }
 });
 
-router.put('/editActor:actor', function (req, res){
+router.put('/editActor:actor', function (req, res) {
     if (authentication(req.body.accessToken)) {
         res.status(501);
     } else {
         res.status(401).send({
-            text:"Unauthorized"
+            text: "Unauthorized"
         });
     }
 });
 
 router.delete('/deleteActor/:actor/:token', function (req, res) {
-    if(authentication(req.params.token)) {
+    if (authentication(req.params.token)) {
         conn.query("DELETE FROM actor_movie WHERE actor_id = (SELECT id FROM actors WHERE name = '"
             + req.params.actor + "')");
         let sql = "DELETE FROM actors WHERE name = '" + req.params.actor + "'";
         conn.query(sql, function (err, response) {
-            if(err) {
+            if (err) {
                 console.log(err);
                 res.status(400).send({
                     text: "Error"
                 });
-            } else if(response.affectedRows === 0) {
+            } else if (response.affectedRows === 0) {
                 res.status(400).send("No actor found");
             } else {
                 res.status(200).send("DELETE successful");

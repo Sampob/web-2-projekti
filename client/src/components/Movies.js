@@ -8,7 +8,6 @@ const Movies = () => {
 
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState('');
-    const [moviePath, setMoviePath] = useState('');
 
     useEffect(() => {
         axios.get(("http://localhost:5000/getMovies:" + search))
@@ -26,7 +25,7 @@ const Movies = () => {
     }
 
     const displayData = movies.map((data) => {
-        let description = '';
+        let description;
 
         if (data.description === '') description = '[No description]';
         else if (data.description.length < 47) description = data.description;
@@ -71,7 +70,7 @@ const Movies = () => {
                 </tr>
                 </thead>
                 <tbody>
-                    {displayData}
+                {displayData}
                 </tbody>
             </Table>
         </Container>

@@ -5,9 +5,7 @@ import AddMovie from "./AddMovie";
 import AddActor from "./AddActor";
 
 import {authenticateUser} from "../functions/AuthenticateUser";
-// eslint-disable-next-line
 import {useEffect, useState} from "react";
-import {Button} from "react-bootstrap";
 
 const Add = () => {
 

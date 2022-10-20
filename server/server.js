@@ -31,16 +31,10 @@ app.get('/test', (req, res) => {
     res.send({express: 'BACKEND TEST'});
 });
 
-//TODO Clean up, array?
+const serverRoutes = [authenticationRoute, loginRoute, newUserRoute, movieActions, getMovies, actorActions, getActors, actorMovies]
+
 //Use these imported routes
-app.use("/", authenticationRoute);
-app.use("/", loginRoute);
-app.use("/", newUserRoute);
-app.use("/", movieActions);
-app.use("/", getMovies);
-app.use("/", actorActions);
-app.use("/", getActors);
-app.use("/", actorMovies);
+app.use("/", serverRoutes);
 
 //Start listening to requests at defined port
 app.listen(port, () => console.log(`Listening port ${port}`));

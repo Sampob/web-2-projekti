@@ -27,7 +27,6 @@ const AddMovie = (props) => {
     }
 
     //TODO Poster uploading
-    // eslint-disable-next-line
     const uploadFile = () => {
 
     }
@@ -99,7 +98,7 @@ const AddMovie = (props) => {
                         onChange={handleMovieTitle}
                         disabled={!props.loggedIn}
                     />
-                    <Form.FloatingLabel style={errorStyle} hidden={!titleError} label={titleErrorText}/>
+                    <p style={errorStyle} hidden={!titleError}>{titleErrorText}</p>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="movieDescription">
