@@ -10,18 +10,12 @@ import ActorPage from "./components/ActorPage";
 
 function App() {
 
-    //Active tab styling
-    const style = {
-        color: 'DodgerBlue',
-        fontWeight: 'bold'
-    }
-
     return (
         <Container>
             <Router>
                 <Navbar expand="sm">
                     <Navbar.Brand href="/">
-                        React-App
+                        Film-Listing
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse>
