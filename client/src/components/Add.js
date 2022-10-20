@@ -4,21 +4,35 @@ import Tabs from 'react-bootstrap/Tabs';
 import AddMovie from "./AddMovie";
 import AddActor from "./AddActor";
 
-// eslint-disable-next-line
 import {authenticateUser} from "../functions/AuthenticateUser";
 // eslint-disable-next-line
 import {useEffect, useState} from "react";
+import {Button} from "react-bootstrap";
 
 const Add = () => {
+
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    useEffect(() => {
+        authenticateUser().then(() => {
+            setLoggedIn(true);
+        }).catch(() => {
+            setLoggedIn(false);
+        });
+    }, []);
 
     return (
         <>
             <Tabs>
                 <Tab eventKey="addMovie" title="Movie">
-                    <AddMovie/>
+                    <AddMovie
+                        loggedIn={loggedIn}
+                    />
                 </Tab>
                 <Tab eventKey="addActor" title="Actor">
-                    <AddActor/>
+                    <AddActor
+                        loggedIn={loggedIn}
+                    />
                 </Tab>
             </Tabs>
         </>

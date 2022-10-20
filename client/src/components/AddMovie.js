@@ -2,7 +2,7 @@ import {Button, Form, Modal} from "react-bootstrap";
 import {useState} from "react";
 import axios from "axios";
 
-const AddMovie = () => {
+const AddMovie = (props) => {
 
     const [movieTitle, changeMovieTitle] = useState('');
     const [movieDescription, changeMovieDescription] = useState('');
@@ -10,6 +10,7 @@ const AddMovie = () => {
     const [successModal, changeSuccessModal] = useState(false);
 
     const [titleError, changeTitleError] = useState(false);
+    const [titleErrorText, changeTitleErrorText] = useState('');
 
     const handleMovieTitle = (e) => {
         changeMovieTitle(e.target.value);
@@ -34,13 +35,13 @@ const AddMovie = () => {
     const validate = () => {
         let returnValue = true;
         if (movieTitle === '') {
+            changeTitleErrorText('Title required');
             changeTitleError(true);
             returnValue = false;
         }
         return returnValue;
     }
 
-    //TODO Duplicate movie error
     const addMovie = (e) => {
         try {
             e.preventDefault();
@@ -52,12 +53,18 @@ const AddMovie = () => {
             axios
                 .post('http://localhost:5000/addMovie', {
                     title: movieTitle,
-                    description: movieDescription
+                    description: movieDescription,
+                    accessToken: JSON.parse(localStorage.getItem('myToken')).accessToken
                 }).then(() => showSuccessModal())
                 .catch(err => {
-                    console.log(err);
+                    inputError(err);
                 });
         }
+    }
+
+    const inputError = (err) => {
+        changeTitleErrorText(err.response.data.text);
+        changeTitleError(true);
     }
 
     const errorStyle = {
@@ -90,8 +97,9 @@ const AddMovie = () => {
                         placeholder="Title"
                         value={movieTitle}
                         onChange={handleMovieTitle}
+                        disabled={!props.loggedIn}
                     />
-                    <Form.FloatingLabel style={errorStyle} hidden={!titleError} label="Title required"/>
+                    <Form.FloatingLabel style={errorStyle} hidden={!titleError} label={titleErrorText}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="movieDescription">
@@ -102,6 +110,7 @@ const AddMovie = () => {
                         placeholder="Description"
                         value={movieDescription}
                         onChange={handleMovieDescription}
+                        disabled={!props.loggedIn}
                     />
                 </Form.Group>
 
@@ -111,10 +120,10 @@ const AddMovie = () => {
                         type="file"
                         value={moviePoster}
                         onChange={handleMoviePoster}
-                        disabled={true}
+                        disabled={true} //TEMPORARY
                     />
                 </Form.Group>
-                <Button variant="success" type="submit">Add</Button>
+                <Button disabled={!props.loggedIn} variant="success" type="submit">Add</Button>
             </Form>
         </>
     );

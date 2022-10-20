@@ -1,10 +1,20 @@
+import {Tab, Tabs} from "react-bootstrap";
+import Movies from "./Movies";
+import Actors from "./Actors";
 
 
 const List = () => {
 
     return (
         <>
-            <h2>List</h2>
+            <Tabs>
+                <Tab eventKey="movies" title="Movies">
+                    <Movies/>
+                </Tab>
+                <Tab eventKey="actors" title="Actors">
+                    <Actors/>
+                </Tab>
+            </Tabs>
         </>
     );
 }

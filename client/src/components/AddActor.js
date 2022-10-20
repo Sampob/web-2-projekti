@@ -3,12 +3,13 @@ import {useState} from "react";
 import axios from "axios";
 import MovieSelection from "./MovieSelection";
 
-const AddActor = () => {
+const AddActor = (props) => {
 
     const [actorName, changeActorName] = useState('');
     const [successModal, changeSuccessModal] = useState(false);
 
     const [actorError, changeActorError] = useState(false);
+    const [actorErrorText, changeActorErrorText] = useState('');
 
     const handleActorName = (e) => {
         changeActorName(e.target.value);
@@ -25,6 +26,7 @@ const AddActor = () => {
     const validate = () => {
         let returnValue = true;
         if (actorName === '') {
+            changeActorErrorText('Title required');
             changeActorError(true);
             returnValue = false;
         }
@@ -42,13 +44,19 @@ const AddActor = () => {
         if(validate()) {
             axios
                 .post('http://localhost:5000/addActor', {
-                    name: actorName
+                    name: actorName,
+                    accessToken: JSON.parse(localStorage.getItem('myToken')).accessToken
                 }).then(() => showSuccessModal())
                 .catch(err => {
-                    console.log(err);
+                    inputError(err);
                 });
         }
 
+    }
+
+    const inputError = (err) => {
+        changeActorErrorText(err.response.data.text);
+        changeActorError(true);
     }
 
     const errorStyle = {
@@ -76,21 +84,22 @@ const AddActor = () => {
             <h3>Add an Actor</h3>
             <Form onSubmit={addActor}>
                 <Form.Group className="mb-3" controlId="movieTitle">
-                    <Form.Label>Title</Form.Label>
+                    <Form.Label>Name</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Actor name"
                         value={actorName}
                         onChange={handleActorName}
+                        disabled={!props.loggedIn}
                     />
-                    <Form.FloatingLabel style={errorStyle} hidden={!actorError} label="Title required"/>
+                    <Form.FloatingLabel style={errorStyle} hidden={!actorError} label={actorErrorText}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="movieDescription">
                     <MovieSelection/>
                 </Form.Group>
 
-                <Button variant="success" type="submit">Add</Button>
+                <Button disabled={!props.loggedIn} variant="success" type="submit">Add</Button>
             </Form>
         </>
     );

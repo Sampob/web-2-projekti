@@ -5,8 +5,16 @@ import Home from "./components/Home";
 import UserPage from "./components/UserPage";
 import List from "./components/List";
 import Add from "./components/Add";
+import MoviePage from "./components/MoviePage";
+import ActorPage from "./components/ActorPage";
 
 function App() {
+
+    //Active tab styling
+    const style = {
+        color: 'DodgerBlue',
+        fontWeight: 'bold'
+    }
 
     return (
         <Container>
@@ -30,8 +38,10 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="user" element={<UserPage/>}/>
-                    <Route path="list" element={<List/>}/>
+                    <Route path="list/*" element={<List/>}/>
                     <Route path="add" element={<Add/>}/>
+                    <Route path="movie" element={<MoviePage/>}/>
+                    <Route path="actor" element={<ActorPage/>}/>
                 </Routes>
             </Router>
         </Container>
