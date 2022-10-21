@@ -145,7 +145,7 @@ const Register = (props) => {
                         value={formUsername}
                         onChange={handleUsername}
                     />
-                    <Form.FloatingLabel style={errorStyle} hidden={!usernameError} label="Field required"/>
+                    <p style={errorStyle} hidden={!usernameError}>Field required</p>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="loginEmail">
@@ -155,7 +155,7 @@ const Register = (props) => {
                         value={formEmail}
                         onChange={handleEmail}
                     />
-                    <Form.FloatingLabel style={errorStyle} hidden={!emailError} label={emailErrorText}/>
+                    <p style={errorStyle} hidden={!emailError}>{emailErrorText}</p>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="loginPassword">
@@ -166,7 +166,7 @@ const Register = (props) => {
                         value={formPassword}
                         onChange={handlePassword}
                     />
-                    <Form.FloatingLabel style={errorStyle} hidden={!passwordError} label={passwordErrorText}/>
+                    <p style={errorStyle} hidden={!passwordError}>{passwordErrorText}</p>
                 </Form.Group>
                 <Button variant="success" type="submit">Register</Button>
             </Form>

@@ -60,7 +60,9 @@ router.delete('/deleteActor/:actor/:token', function (req, res) {
                     text: "Error"
                 });
             } else if (response.affectedRows === 0) {
-                res.status(400).send("No actor found");
+                res.status(400).send({
+                    text: "No actor found"
+                });
             } else {
                 res.status(200).send("DELETE successful");
             }

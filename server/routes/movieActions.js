@@ -96,7 +96,9 @@ router.delete('/deleteMovie/:movie/:token', function (req, res) {
                     text: "Error"
                 });
             } else if (response.affectedRows === 0) {
-                res.status(400).send("No such movie found");
+                res.status(400).send({
+                    text: "No such movie found"
+                });
             } else {
                 res.status(200).send("DELETE successful");
             }
