@@ -288,3 +288,11 @@ Jatkokehitys näyttelijöissä kaikki elokuvat joissa mukana.
         "name": "Graham Chapman"
     }
 
+## Kuvankaappauksia käyttöliittymästä
+![addMovie](https://user-images.githubusercontent.com/75117957/197154685-320eb57f-7b23-4f4b-8ab0-aeec2e76bdac.png)
+![kuva](https://user-images.githubusercontent.com/75117957/197155145-dd2647b8-0331-4d08-9212-c523915ca760.png)
+![kuva](https://user-images.githubusercontent.com/75117957/197155239-7720d44a-cf8c-4af1-bd60-7f9c3f74eaa5.png)
+![kuva](https://user-images.githubusercontent.com/75117957/197155343-bc6855be-aa32-44a7-b75a-26c340b0d096.png)
+![kuva](https://user-images.githubusercontent.com/75117957/197155383-6c9dfd97-dba0-4ae6-91ca-38768e366b70.png)
+
+
