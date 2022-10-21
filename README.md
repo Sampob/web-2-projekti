@@ -1,5 +1,7 @@
 # web-2-projekti "Film-Listing"
  
+ Author Sampo Bredenberg
+ 
 ## Kuvaus
 **Film-Listing** rajapinta tallentaa elokuviva ja näyttelijöitä, sekä mahdollistaa näyttelijöiden lisäämisen elokuviin. 
 Rajapinnan tietojen tarkasteleminen on vapaata. Tietojen lisääminen, muuttaminen ja poistaminen edellyttää käyttäjän luomista. 
