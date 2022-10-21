@@ -130,7 +130,7 @@ const Login = (props) => {
                         value={loginEmail}
                         onChange={handleLoginEmail}
                     />
-                    <Form.FloatingLabel style={errorStyle} hidden={!emailError} label={emailErrorText}/>
+                    <p style={errorStyle} hidden={!emailError}>{emailErrorText}</p>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="loginFormPassword">
@@ -141,7 +141,7 @@ const Login = (props) => {
                         value={loginPassword}
                         onChange={handleLoginPassword}
                     />
-                    <Form.FloatingLabel style={errorStyle} hidden={!passwordError} label={passwordErrorText}/>
+                    <p style={errorStyle} hidden={!passwordError}>{passwordErrorText}</p>
                 </Form.Group>
                 <Button variant="success" type="submit">Login</Button>
             </Form>

@@ -89,7 +89,7 @@ const AddActor = (props) => {
                         onChange={handleActorName}
                         disabled={!props.loggedIn}
                     />
-                    <Form.FloatingLabel style={errorStyle} hidden={!actorError} label={actorErrorText}/>
+                    <p style={errorStyle} hidden={!actorError}>{actorErrorText}</p>
                 </Form.Group>
                 <Button disabled={!props.loggedIn} variant="success" type="submit">Add</Button>
             </Form>
